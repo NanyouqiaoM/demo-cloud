@@ -6,3 +6,4 @@ spring:
           uri: lb://demo-servers
           predicates:
             - Path=/user/**
+

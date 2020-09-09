@@ -18,8 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
     @Value("${user.name}")
     private String userName;
-    @Autowired
-    private HttpServletRequest request;
+
 
     @RequestMapping("/get")
     public String get() {
@@ -28,8 +27,11 @@ public class UserController {
     }
 
     @GetMapping("/info")
-    public User info(@RequestParam String accessToken) {
+    public User info(HttpServletRequest request) {
+        String accessToken = request.getHeader("access-token");
         System.out.println("token = " + accessToken);
+        String userInfo = request.getHeader("user-info");
+        System.out.println("userInfo = " + userInfo);
         if (accessToken.equals("abc")) {
             return new User(1, "张三", 20);
         }
